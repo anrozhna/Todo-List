@@ -5,7 +5,7 @@ from tasks.views import (
     TaskCreateView,
     TaskUpdateView,
     TaskDeleteView,
-    ChangeIsCompletedView, TagListView
+    ChangeIsCompletedView, TagListView, TagCreateView
 )
 
 app_name = "tasks"
@@ -36,5 +36,10 @@ urlpatterns = [
         "tags/",
         TagListView.as_view(),
         name="tag-list"
+    ),
+    path(
+        "tags/create/",
+        TagCreateView.as_view(),
+        name="tag-create"
     ),
 ]
