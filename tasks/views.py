@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from tasks.models import Task
@@ -26,3 +26,13 @@ class TaskUpdateView(generic.UpdateView):
 class TaskDeleteView(generic.DeleteView):
     model = Task
     success_url = reverse_lazy("tasks:index")
+
+
+class ChangeIsCompletedView(generic.RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        task_id = self.kwargs.get("pk")
+        task = get_object_or_404(Task, pk=task_id)
+        task.is_completed = not task.is_completed
+        task.save()
+        page_number = self.request.POST.get("page", 1)
+        return f"{reverse("tasks:index")}?page={page_number}"
