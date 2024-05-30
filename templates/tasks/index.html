@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>ToDo List</title>{% endblock %}
+
+{% block content %}
+  <h2>TODO List</h2>
+  <a class="btn btn-primary mb-3" href="#">Add task</a>
+  {% for task in tasks %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ task.content }}
+          {% if task.is_done %}
+            <span class="text-success">Done</span>
+          {% else %}
+            <span class="text-danger">Not done</span>
+          {% endif %}
+        </h5>
+        <p class="card-text">
+          <small class="text-muted">Created: {{ task.created_at }}</small>
+          {% if task.deadline %}
+            <br><small class="text-muted">Deadline: {{ task.deadline }}</small>
+          {% endif %}
+          <br><strong>Tags:</strong>
+          {% for tag in task.tags.all %}
+            {{ tag.name }}
+            {% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+        {% if task.is_done %}
+          <a href="#" class="btn btn-secondary">Undo</a>
+        {% else %}
+          <a href="#" class="btn btn-success">Complete</a>
+        {% endif %}
+        <a href="#" class="btn btn-link">Update</a>
+        <a href="#" class="btn btn-link">Delete</a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
