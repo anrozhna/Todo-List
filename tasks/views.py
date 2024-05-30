@@ -7,4 +7,4 @@ from tasks.models import Task
 class IndexView(generic.ListView):
     model = Task
     template_name = "tasks/index.html"
-    paginate_by = 5
+    paginate_by = 3
