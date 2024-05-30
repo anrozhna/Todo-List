@@ -3,9 +3,9 @@
 {% block title %}<title>ToDo List</title>{% endblock %}
 
 {% block content %}
-  <div class="d-grid gap-2 m-5 d-md-flex justify-content-md-between">
-    <h2>TODO List</h2>
-    <a class="btn btn-primary" href="{% url 'tasks:task-create' %}">Add task</a>
+  <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+    <h1>TODO List</h1>
+    <a href="{% url 'tasks:task-create' %}" class="btn btn-primary">Add task</a>
   </div>
   {% for task in task_list %}
     <div class="card mb-3">
