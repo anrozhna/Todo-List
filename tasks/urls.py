@@ -8,7 +8,8 @@ from tasks.views import (
     ChangeIsCompletedView,
     TagListView,
     TagCreateView,
-    TagUpdateView
+    TagUpdateView,
+    TagDeleteView
 )
 
 app_name = "tasks"
@@ -49,5 +50,10 @@ urlpatterns = [
         "tags/<int:pk>/update/",
         TagUpdateView.as_view(),
         name="tag-update"
+    ),
+    path(
+        "tags/<int:pk>/delete/",
+        TagDeleteView.as_view(),
+        name="tag-delete"
     ),
 ]

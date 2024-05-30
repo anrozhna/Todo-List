@@ -22,7 +22,7 @@
           <a href="{% url 'tasks:tag-update' pk=tag.pk %}" class="btn btn-secondary">Update</a>
         </td>
         <td>
-          <a href="" class="btn btn-secondary">Delete</a>
+          <a href="{% url 'tasks:tag-delete' pk=tag.pk %}" class="btn btn-secondary">Delete</a>
         </td>
       </tr>
     {% endfor %}
