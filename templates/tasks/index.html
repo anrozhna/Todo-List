@@ -33,7 +33,7 @@
         {% else %}
           <a href="#" class="btn btn-success">Complete</a>
         {% endif %}
-        <a href="#" class="btn btn-link">Update</a>
+        <a href="{% url 'tasks:task-update' pk=task.pk %}" class="btn btn-link">Update</a>
         <a href="#" class="btn btn-link">Delete</a>
       </div>
     </div>
