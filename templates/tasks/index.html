@@ -3,9 +3,11 @@
 {% block title %}<title>ToDo List</title>{% endblock %}
 
 {% block content %}
-  <h2>TODO List</h2>
-  <a class="btn btn-primary mb-3" href="#">Add task</a>
-  {% for task in tasks %}
+  <div class="d-grid gap-2 m-5 d-md-flex justify-content-md-between">
+    <h2>TODO List</h2>
+    <a class="btn btn-primary" href="#">Add task</a>
+  </div>
+  {% for task in task_list %}
     <div class="card mb-3">
       <div class="card-body">
         <h5 class="card-title">{{ task.content }}
