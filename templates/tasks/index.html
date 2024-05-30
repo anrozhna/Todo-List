@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>ToDo List</title>{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+    <h1>TODO List</h1>
+    <a href="{% url 'tasks:task-create' %}" class="btn btn-primary">Add task</a>
+  </div>
+  {% for task in task_list %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ task.content }}
+          {% if task.is_completed %}
+            <span class="text-success">Done</span>
+          {% else %}
+            <span class="text-danger">Not done</span>
+          {% endif %}
+        </h5>
+        <p class="card-text">
+          <small class="text-muted">Created: {{ task.created_at }}</small>
+          {% if task.deadline %}
+            <br><small class="text-muted">Deadline: {{ task.deadline }}</small>
+          {% endif %}
+          <br><strong>Tags:</strong>
+          {% for tag in task.tags.all %}
+            {{ tag.name }}
+            {% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+        <form class="btn " method="post"
+              action="{% url 'tasks:task-completed' pk=task.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="page" value="{{ page_obj.number }}">
+          {% if task.is_completed %}
+            <button type="submit" class="btn btn-secondary">
+              Undo
+            </button>
+          {% else %}
+            <button type="submit" class="btn btn-success">
+              Complete
+            </button>
+          {% endif %}
+        </form>
+
+        <a href="{% url 'tasks:task-update' pk=task.pk %}" class="btn btn-link">Update</a>
+        <a href="{% url 'tasks:task-delete' pk=task.pk %}" class="btn btn-link">Delete</a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
