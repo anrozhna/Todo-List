@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from tasks.models import Task
+from tasks.models import Task, Tag
 
 
 class IndexView(generic.ListView):
@@ -36,3 +36,9 @@ class ChangeIsCompletedView(generic.RedirectView):
         task.save()
         page_number = self.request.POST.get("page", 1)
         return f"{reverse("tasks:index")}?page={page_number}"
+
+
+class TagListView(generic.ListView):
+    model = Tag
+    template_name = "tasks/tag_list.html"
+    paginate_by = 5
