@@ -19,7 +19,7 @@
       <tr>
         <td>{{ tag.name }}</td>
         <td>
-          <a href="" class="btn btn-secondary">Update</a>
+          <a href="{% url 'tasks:tag-update' pk=tag.pk %}" class="btn btn-secondary">Update</a>
         </td>
         <td>
           <a href="" class="btn btn-secondary">Delete</a>
